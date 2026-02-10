@@ -5,6 +5,7 @@ import Upload from "@/components/Upload/Upload";
 import Image from "next/image";
 import { useState } from "react";
 export default function Home() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:5000";
   const [file, setFile] = useState<File | null>(null);
   const [resultImage, setResultImage] = useState<string | null>(null);
   const [imageDimensions, setImageDimensions] = useState<{
@@ -30,7 +31,7 @@ export default function Home() {
     formData.append("mode", mode);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/api/remove-bg", {
+      const response = await fetch(`${API_URL}/api/remove-bg`, {
         method: "POST",
         body: formData,
       });
